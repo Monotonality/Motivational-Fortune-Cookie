@@ -16,15 +16,140 @@ body {
     overflow: hidden;
 }
 
+.cookie-section {
+    text-align: center;
+    z-index: 10;
+    position: relative;
+}
+
 img {
     animation: float 3s ease-in-out infinite;
     z-index: 10;
     position: relative;
     max-width: 220px;
     height: auto;
-    filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.3)) 
-            drop-shadow(0 0 40px rgba(255, 215, 0, 0.2))
-            drop-shadow(0 0 60px rgba(255, 215, 0, 0.1));
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+img:hover {
+    transform: scale(1.08);
+    filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.5));
+}
+
+img:active {
+    transform: scale(0.95);
+}
+
+.click-indicator {
+    color: #FFD700;
+    font-size: 1.2rem;
+    font-family: 'Arial', sans-serif;
+    margin-top: 20px;
+    opacity: 0.8;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    animation: fadeOut 8s ease-in-out forwards;
+}
+
+/* Fortune Card Styles */
+.fortune-card {
+    position: fixed;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.8);
+    z-index: 1000;
+    opacity: 0;
+    transition: all 0.5s ease;
+    pointer-events: none;
+}
+
+.fortune-card.show {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+    pointer-events: all;
+}
+
+.fortune-card.fade-out {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.8);
+    pointer-events: none;
+}
+
+.card-content {
+    background: #F5F5DC;
+    color: #8B0000;
+    padding: 1.5rem 2rem;
+    border-radius: 4px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    text-align: left;
+    min-width: 280px;
+    max-width: 320px;
+    position: relative;
+    border: 1px solid #DEB887;
+    font-family: 'Arial', sans-serif;
+}
+
+.card-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 30px;
+    height: 30px;
+    background: #8B0000;
+    border-radius: 0 0 4px 0;
+}
+
+.card-content h3 {
+    display: none;
+}
+
+.card-content p {
+    font-size: 1.1rem;
+    line-height: 1.4;
+    margin: 0;
+    font-weight: normal;
+    font-style: normal;
+    color: #8B0000;
+    text-align: left;
+    padding: 0 0 0 40px;
+}
+
+.close-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: #8B0000;
+    border: none;
+    font-size: 1rem;
+    color: #F5F5DC;
+    cursor: pointer;
+    padding: 0;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    font-weight: bold;
+}
+
+.close-btn:hover {
+    background: #A00000;
+    transform: scale(1.1);
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 0.8;
+    }
+    50% {
+        opacity: 0.8;
+    }
+    100% {
+        opacity: 0;
+    }
 }
 
 @keyframes float {
@@ -33,45 +158,5 @@ img {
     }
     50% {
         transform: translateY(-20px);
-    }
-}
-
-.particle-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-}
-
-.particle {
-    position: absolute;
-    width: var(--size, 4px);
-    height: var(--size, 4px);
-    background: linear-gradient(45deg, #FFD700, #FFA500);
-    border-radius: 50%;
-    left: var(--left, 50%);
-    animation: rise var(--duration, 8s) linear infinite;
-    animation-delay: var(--delay, 0s);
-    opacity: 0.7;
-    box-shadow: 0 0 6px rgba(255, 215, 0, 0.6);
-    transition: transform 0.1s ease-out;
-}
-
-@keyframes rise {
-    0% {
-        transform: translateY(100vh) translateX(0);
-        opacity: 0;
-    }
-    10% {
-        opacity: 0.7;
-    }
-    90% {
-        opacity: 0.7;
-    }
-    100% {
-        transform: translateY(-100px) translateX(var(--drift, 20px));
-        opacity: 0;
     }
 }
